@@ -1,7 +1,5 @@
 package io.github.deficuet.tools.image
 
-import javafx.embed.swing.SwingFXUtils
-import javafx.scene.image.Image as ImageFX
 import java.awt.Graphics2D
 import java.awt.Image
 import java.awt.RenderingHints
@@ -59,8 +57,6 @@ fun BufferedImage.copy() = BufferedImage(colorModel, copyData(null), isAlphaPrem
 fun BufferedImage.paste(other: Image, x: Int, y: Int) = edit {
     drawImage(other, x, y, null)
 }
-
-fun BufferedImage.toFXImage(): ImageFX = SwingFXUtils.toFXImage(this, null)
 
 fun BufferedImage.toByteArray(format: String): ByteArray {
     return ByteArrayOutputStream().use {
