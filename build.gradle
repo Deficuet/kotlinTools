@@ -1,0 +1,44 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.7.21'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.12'
+    id 'maven-publish'
+}
+
+group = 'io.github.deficuet'
+version = '0.0.1'
+
+javafx {
+    version = "11.0.2"
+    modules = ['javafx.swing']
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin"
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = 11
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = 11
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
