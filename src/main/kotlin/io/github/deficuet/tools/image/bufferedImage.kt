@@ -9,7 +9,10 @@ import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
 import javax.imageio.ImageIO
 
-inline fun BufferedImage(width: Int, height: Int, type: Int, initializer: Graphics2D.() -> Unit): BufferedImage {
+inline fun BufferedImage(
+    width: Int, height: Int, type: Int,
+    initializer: Graphics2D.(BufferedImage) -> Unit
+): BufferedImage {
     return BufferedImage(width, height, type).apply {
         with(createGraphics()) {
             setRenderingHints(mapOf(
@@ -19,7 +22,7 @@ inline fun BufferedImage(width: Int, height: Int, type: Int, initializer: Graphi
                 RenderingHints.KEY_INTERPOLATION to RenderingHints.VALUE_INTERPOLATION_BICUBIC,
                 RenderingHints.KEY_ALPHA_INTERPOLATION to RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY
             ))
-            initializer()
+            initializer(this@apply)
             dispose()
         }
     }
